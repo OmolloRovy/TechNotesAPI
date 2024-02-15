@@ -11,16 +11,16 @@ const Welcome = () => {
             <p>{today}</p>
 
             <h1>Welcome!</h1>
+<p>
+            <Link to="/dash/notes"><button>Created Notes</button></Link>
 
-            <p><Link to="/dash/notes"><button>View Notes</button></Link></p>
+            <Link to="/dash/notes/new"><button>Add New Note</button></Link>
 
-            <p><Link to="/dash/notes/new"><button>Add New Note</button></Link></p>
+            <Link to="/dash/users"><button>Employees</button></Link>
 
-            <p><Link to="/dash/users"><button>View User Settings</button></Link></p>
-
-            <p><Link to="/dash/users/new"><button>Add New User</button></Link></p>
-            <p><Link to="/dash/users/new"><button>Add New User</button></Link></p>
-
+            <Link to="/dash/users/new"><button>Add New User</button></Link>
+            <Link to="/dash/users/new"><button>Enter Customer details</button></Link>
+            </p>
         </section>
     )
 
