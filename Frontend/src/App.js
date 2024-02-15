@@ -1,41 +1,57 @@
-import { Routes, Route } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Public from './components/Public';
 import Login from './features/auth/Login';
-import DashLayout from './components/DashLayout'
-import Welcome from './features/auth/Welcome'
-import NotesList from './features/notes/NotesList'
-import UsersList from './features/users/UsersList'
+import DashLayout from './components/DashLayout';
+import Welcome from './features/auth/Welcome';
+import NotesList from './features/notes/NotesList';
+import UsersList from './features/users/UsersList';
 import EditUser from './features/users/EditUser';
 import NewUserForm from './features/users/NewUserForm';
 import EditNote from './features/notes/EditNote';
 import NewNote from './features/notes/NewNote';
 import Prefetch from './features/auth/Prefetch';
+import CustomerDetails from './features/Customers/CustomerDetails';
+import { CustomerDetailsProvider } from './features/Customers/customerDetailsContext';
+import Customer from './features/Customers/Customer'; // Import Customer component
 
 function App() {
+  const [customerDetails, setCustomerDetails] = useState({
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com',
+    phoneNumber: '123-456-7890',
+  });
+
   return (
     <Routes>
       <Route path="" element={<Layout />}>
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
-<Route element={ <Prefetch /> }>
-        <Route path="dash" element={<DashLayout />}>
- 
-          <Route index element={<Welcome />} />
-
-          <Route path="notes">
-            <Route index element={<NotesList />} />
-            <Route path=":id" element={< EditNote/>} />
-            <Route path="new" element={< NewNote/>} />
-          </Route>
-
-          <Route path="users">
-            <Route index element={<UsersList />} />
-          <Route path=":id" element={< EditUser/>} />
-          <Route path="new" element={< NewUserForm/>} />
+        <Route element={<Prefetch />}>
+          <Route path="dash" element={<DashLayout />}>
+            <Route index element={<Welcome />} />
+            <Route path="notes">
+              <Route index element={<NotesList />} />
+              <Route path=":id" element={<EditNote />} />
+              <Route path="new" element={<NewNote />} />
             </Route>
-
-        </Route>{/* End Dash */}
+            <Route path="users">
+              <Route index element={<UsersList />} />
+              <Route path=":id" element={<EditUser />} />
+              <Route path="new" element={<NewUserForm />} />
+            </Route>
+            <Route path="customers">
+              <Route index element={<CustomerDetailsProvider customerDetails={customerDetails}>
+                <Customer />
+              </CustomerDetailsProvider>} />
+              <Route path=":id" element={<CustomerDetailsProvider customerDetails={customerDetails}>
+                <Customer />
+              </CustomerDetailsProvider>} />
+            </Route>
+          </Route>
         </Route>
       </Route>
     </Routes>
