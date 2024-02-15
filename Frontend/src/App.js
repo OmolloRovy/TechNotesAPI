@@ -11,11 +11,10 @@ import EditUser from './features/users/EditUser';
 import NewUserForm from './features/users/NewUserForm';
 import EditNote from './features/notes/EditNote';
 import NewNote from './features/notes/NewNote';
-import Prefetch from './features/auth/Prefetch';
 import CustomerList from './features/Customers/CustomerList'
-import Customer from './features/Customers/Customer'; // Import Customer component
-
+import Prefetch from './features/auth/Prefetch';
 function App() {
+
 
   return (
     <Routes>
@@ -31,16 +30,13 @@ function App() {
               <Route path="new" element={<NewNote />} />
             </Route>
             <Route path="users">
-            <Route index element={<UsersList />} />
-
+              <Route index element={<UsersList />} />
               <Route path=":id" element={<EditUser />} />
               <Route path="new" element={<NewUserForm />} />
             </Route>
             <Route path="customer">
-              <Route index element={<CustomerList />} />
-                <Customer />
-          
-            </Route>
+            <Route index element={<CustomerList />} />
+          </Route>
           </Route>
         </Route>
       </Route>
