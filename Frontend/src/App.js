@@ -12,18 +12,10 @@ import NewUserForm from './features/users/NewUserForm';
 import EditNote from './features/notes/EditNote';
 import NewNote from './features/notes/NewNote';
 import Prefetch from './features/auth/Prefetch';
-import CustomerDetails from './features/Customers/CustomerDetails';
-import { CustomerDetailsProvider } from './features/Customers/customerDetailsContext';
+import CustomerList from './features/Customers/CustomerList'
 import Customer from './features/Customers/Customer'; // Import Customer component
 
 function App() {
-  const [customerDetails, setCustomerDetails] = useState({
-    id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phoneNumber: '123-456-7890',
-  });
 
   return (
     <Routes>
@@ -39,17 +31,15 @@ function App() {
               <Route path="new" element={<NewNote />} />
             </Route>
             <Route path="users">
-              <Route index element={<UsersList />} />
+            <Route index element={<UsersList />} />
+
               <Route path=":id" element={<EditUser />} />
               <Route path="new" element={<NewUserForm />} />
             </Route>
-            <Route path="customers">
-              <Route index element={<CustomerDetailsProvider customerDetails={customerDetails}>
+            <Route path="customer">
+              <Route index element={<CustomerList />} />
                 <Customer />
-              </CustomerDetailsProvider>} />
-              <Route path=":id" element={<CustomerDetailsProvider customerDetails={customerDetails}>
-                <Customer />
-              </CustomerDetailsProvider>} />
+          
             </Route>
           </Route>
         </Route>
