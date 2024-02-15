@@ -1,34 +1,45 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
-import React from "react";
-import { useGetCustomersQuery } from "./customersApiSlice";
-import Customer from "./Customer";
-
+import React from 'react'
 
 const CustomerList = () => {
-  const { data, isLoading, isSuccess, isError } = useGetCustomersQuery();
+  return (
+    <div>CustomerList</div>
+  )
+}
 
-  let content;
+export default CustomerList
 
-  if (isLoading) {
-    content = <p>Loading...</p>;
-  }
 
-  if (isError) {
-    content = <p className="errmsg">Error fetching customers list.</p>;
-  }
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
+// import React from "react";
+// import { useGetCustomersQuery } from "./customersApiSlice";
+// import Customer from "./Customer";
 
-  if (isSuccess) {
-    const { ids } = data;
 
-    if (ids.length > 0) {
-      content = ids.map((id) => <Customer key={id} id={id} />);
-    } else {
-      content = <p>No customers found.</p>;
-    }
-  }
+// const CustomerList = () => {
+//   const { data, isLoading, isSuccess, isError } = useGetCustomersQuery();
 
-  return content;
-};
+//   let content;
 
-export default CustomerList;
+//   if (isLoading) {
+//     content = <p>Loading...</p>;
+//   }
+
+//   if (isError) {
+//     content = <p className="errmsg">Error fetching customers list.</p>;
+//   }
+
+//   if (isSuccess) {
+//     const { ids } = data;
+
+//     if (ids.length > 0) {
+//       content = ids.map((id) => <Customer key={id} id={id} />);
+//     } else {
+//       content = <p>No customers found.</p>;
+//     }
+//   }
+
+//   return content;
+// };
+
+// export default CustomerList;
