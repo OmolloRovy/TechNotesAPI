@@ -1,6 +1,6 @@
-import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import { createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/apiSlice";
-
+import { createSelector} from '@reduxjs/toolkit';
 const customersAdapter = createEntityAdapter({
   sortComparer: (a, b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1,
 });
@@ -61,38 +61,25 @@ export const {
   useAddNewCustomerMutation,
   useUpdateCustomerMutation,
   useDeleteCustomerMutation,
-  selectCustomerById,
+  
 } = customersApiSlice;
 
 //SELECTORS
-import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
-// Import your CustomerApiSlice here
-
-const customersAdapter = createEntityAdapter({});
 
 // State selector
-const selectCustomersResult = customersApiSlice.endpoints.getCustomers.select();
+export const selectCustomersResult = customersApiSlice.endpoints.getCustomers.select();
 
 // Normalized data selector (if using RTK Query)
 const selectCustomersData = createSelector(
   selectCustomersResult,
+  customerResult => customerResult.data //nomalized sate object with IDs and entities
   // ... transform response using normalize function if needed
 );
+//getSelectors creates these selectors and we rename them with aliases using destructuring
+export const {
+  selectAll: selectAllCustomers,
+  selectById: selectCustomerById,
+  selectIds:selectCustomersIds
+  //pass in  a selector that returns the customer slice of state
+}=customersAdapter.getSelectors(state => selectCustomersData(state) ?? initialState)
 
-// Selectors for accessing customer data:
-const selectCustomerById = createSelector(
-  // ... state and ID selectors based on your data structure
-);
-
-const selectAllCustomers = createSelector(
-  // ... state selector to access all customers
-);
-
-// Other selectors as needed based on your specific requirements
-
-// Export selectors
-export {
-  selectCustomerById,
-  selectAllCustomers,
-  // ... other selectors
-};
