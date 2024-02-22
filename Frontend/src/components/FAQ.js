@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import 'react-collapse/css/collapse.css'; // Import for interactive accordion
+
 import Collapse from 'react-collapse';
 
 const FAQ = () => {
