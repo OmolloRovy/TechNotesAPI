@@ -35,7 +35,7 @@ function App() {
               <Route path=":id" element={<EditUser />} />
               <Route path="new" element={<NewUserForm />} />
             </Route>
-            <Route path="customers">
+            <Route path="customer">
             <Route index element={<CustomerList />} />
           </Route>
           </Route>

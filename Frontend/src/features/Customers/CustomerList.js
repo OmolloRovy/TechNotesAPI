@@ -5,7 +5,7 @@ import { useGetCustomersQuery } from './customersApiSlice'
  
 const CustomerList = () => {
   const {
-    data: customers,
+    data: customer,
     isLoading,
     isSuccsess,
     isError,
@@ -25,7 +25,7 @@ const CustomerList = () => {
       content = <p className="errmsg">Error fetching customers list.</p>;
     }
     if (isSuccess) {
-      const { ids } = customers;
+      const { ids } = customer;
   
       const tableContent = ids?.length
       ? ids.map(customerId => <Customer key={customerId} userId={customerId} />)

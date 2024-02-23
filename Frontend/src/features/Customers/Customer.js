@@ -11,7 +11,7 @@ const Customer = ({customerId}) => {
     const customer = useSelector((state) => selectCustomerById(state, customerId));
     const navigate = useNavigate()
     if (customer){
-        const handleEdit = () => navigate(`/dash/customers/${customerId}`)
+        const handleEdit = () => navigate(`/dash/customer/${customerId}`)
         const cellStatus = customer.active ? '' : 'table__cell--inactive'
         return (
             <tr className="table__row user">
