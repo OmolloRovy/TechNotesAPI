@@ -1,4 +1,4 @@
-import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import {  createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/apiSlice";
 import { createSelector } from '@reduxjs/toolkit';
 
@@ -11,7 +11,7 @@ const initialState = customersAdapter.getInitialState();
 export const customersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCustomers: builder.query({
-      query: () => "/customer",
+      query: () => "/customers",
       validateStatus:(response,result)=>{
         return response.status === 200 && !result.isError
       },
@@ -33,7 +33,7 @@ export const customersApiSlice = apiSlice.injectEndpoints({
     }),
     addNewCustomer: builder.mutation({
       query: (initialCustomer) => ({
-        url: "/customer",
+        url: "/customers",
         method: "POST",
         body: initialCustomer,
       }),
@@ -41,7 +41,7 @@ export const customersApiSlice = apiSlice.injectEndpoints({
     }),
     updateCustomer: builder.mutation({
       query: (initialCustomer) => ({
-        url: "/customer",
+        url: "/customers",
         method: "PATCH",
         body: initialCustomer,
       }),
@@ -49,7 +49,7 @@ export const customersApiSlice = apiSlice.injectEndpoints({
     }),
     deleteCustomer: builder.mutation({
       query: ({ id }) => ({
-        url: `/customer/${id}`,
+        url: `/customers/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result, error, arg) => [{ type: "Customer", id: arg.id }],
@@ -80,4 +80,5 @@ export const {
   selectById: selectCustomerById,
   selectAll: selectAllCustomers,
  selectIds: selectCustomerId
+ //pass in selector thta returns the customer slice of state
 }= customersAdapter.getSelectors(state => selectCustomersData(state)?? initialState)
