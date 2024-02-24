@@ -51,4 +51,4 @@ export const { selectAll: selectCustomers } = customersAdapter.getSelectors(
   state => state.customers
 );
 
-export const useGetCustomersQuery = () => useGetCustomersQuery('customers');
+export useGetCustomersQuery = () => useGetCustomersQuery('customers');
