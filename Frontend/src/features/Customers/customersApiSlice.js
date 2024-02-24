@@ -1,84 +1,54 @@
-import {  createEntityAdapter } from "@reduxjs/toolkit";
-import { apiSlice } from "../../app/api/apiSlice";
-import { createSelector } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { client } from '../../api/client';
+import { useGetCustomersQuery } from '@reduxjs/toolkit/query';
 
-const customersAdapter = createEntityAdapter({
-  sortComparer: (a, b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1,
-});
+const customersAdapter = createEntityAdapter();
 
 const initialState = customersAdapter.getInitialState();
 
-export const customersApiSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    getCustomers: builder.query({
-      query: () => "/customers",
-      validateStatus:(response,result)=>{
-        return response.status === 200 && !result.isError
-      },
-      keepUnusedDataFor:5,
-      transformResponse: (responseData) => {
-        const loadedCustomers = responseData.map((customer) => {
-          customer.id = customer._id;
-          return customer;
-        });
-        return customersAdapter.setAll(initialState, loadedCustomers);
-      },
-      providesTags: (result, error, arg) =>
-        result
-          ? [
-              { type: "Customer", id: "LIST" },
-              ...result.ids.map((id) => ({ type: "Customer", id })),
-            ]
-          : [{ type: "Customer", id: "LIST" }],
-    }),
-    addNewCustomer: builder.mutation({
-      query: (initialCustomer) => ({
-        url: "/customers",
-        method: "POST",
-        body: initialCustomer,
-      }),
-      invalidatesTags: [{ type: "Customer", id: "LIST" }],
-    }),
-    updateCustomer: builder.mutation({
-      query: (initialCustomer) => ({
-        url: "/customers",
-        method: "PATCH",
-        body: initialCustomer,
-      }),
-      invalidatesTags: (result, error, arg) => [{ type: "Customer", id: arg.id }],
-    }),
-    deleteCustomer: builder.mutation({
-      query: ({ id }) => ({
-        url: `/customers/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: (result, error, arg) => [{ type: "Customer", id: arg.id }],
-    }),
-  }),
-});
+export const getCustomers = createAsyncThunk(
+  'customers/getCustomers',
+  async () => {
+    const response = await client.get('/customers');
+    const { data } = response;
 
-export const {
-  useGetCustomersQuery,
-  useAddNewCustomerMutation,
-  useUpdateCustomerMutation,
-  useDeleteCustomerMutation,
- 
-} = customersApiSlice;
+    const transformedData = data.map(customer => ({
+      id: customer.id,
+      name: customer.name,
+      email: customer.email,
+      address: customer.address,
+      phoneNumber: customer.phoneNumber,
+      deviceDetails: customer.deviceDetails,
+    }));
 
-// State selector
-export const selectCustomersResult = customersApiSlice.endpoints.getCustomers.select();
-
-// Normalized data selector (if using RTK Query)
-const selectCustomersData = createSelector(
-  selectCustomersResult,
-  customerResult => customerResult.data
-
-
+    return transformedData;
+  }
 );
 
-export const {
-  selectById: selectCustomerById,
-  selectAll: selectAllCustomers,
- selectIds: selectCustomerId
- //pass in selector thta returns the customer slice of state
-}= customersAdapter.getSelectors(state => selectCustomersData(state)?? initialState)
+const customersSlice = createSlice({
+  name: 'customers',
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(getCustomers.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getCustomers.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        customersAdapter.setAll(state, action.payload);
+      })
+      .addCase(getCustomers.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default customersSlice.reducer;
+
+export const { selectAll: selectCustomers } = customersAdapter.getSelectors(
+  state => state.customers
+);
+
+export const useGetCustomersQuery = () => useGetCustomersQuery('customers');
