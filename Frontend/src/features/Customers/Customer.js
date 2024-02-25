@@ -10,15 +10,15 @@ const Customer = (customerId) => {
     const navigate = useNavigate()
     if (customer){
               const handleEdit = () => navigate(`/dash/customers/${customerId}`)
-              const cellStatus = customer.active ? '' : 'table__cell--inactive'
+            
               return (
                   <tr className="table__row user">
-                      <td className={`table__cell ${cellStatus}`}>{customer.name}</td>
-                      <td className={`table__cell ${cellStatus}`}>{customer.email}</td>
-                      <td className={`table__cell ${cellStatus}`}>{customer.address}</td>
-                      <td className={`table__cell ${cellStatus}`}>{customer.phone_number}</td>
-                      <td className={`table__cell ${cellStatus}`}>{customer.device_details}</td>
-                      <td className={`table__cell ${cellStatus}`}>
+                      <td className={`table__cell `}>{customer.name}</td>
+                      <td className={`table__cell `}>{customer.email}</td>
+                      <td className={`table__cell `}>{customer.address}</td>
+                      <td className={`table__cell `}>{customer.phone_number}</td>
+                      <td className={`table__cell `}>{customer.device_details}</td>
+                      <td className={`table__cell `}>
                           <button
                               className="icon-button table__button"
                               onClick={handleEdit}

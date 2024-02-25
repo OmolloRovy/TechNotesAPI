@@ -32,9 +32,7 @@ const CustomerList = () => {
       <table className="table table--users">
         <thead className="table__thead">
           <tr>
-            <th scope="col" className="table__th user__username">
-              Username
-            </th>
+
             <th scope="col" className="table__th user__username">
               Name
             </th>
