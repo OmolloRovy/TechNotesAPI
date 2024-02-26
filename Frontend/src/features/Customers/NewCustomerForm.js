@@ -25,7 +25,33 @@ const NewCustomerForm = () => {
             useEffect(() => {
               setValidEmail(USER_REGEX.test(email))
           }, [email])
-      
+
+          useEffect(() => {
+            if (isSuccess) {
+                setName('')
+                setEmail('')
+                setAddress('')
+                setPhone_number('')
+                setDevice_details('')
+                navigate('/dash/customers')
+            }
+        }, [isSuccess, navigate])
+        const onNameChanged = e => setName(e.target.value)
+        const onEmailChanged = e => setEmail(e.target.value)
+        const onAddressChanged = e => setAddress(e.target.value)
+        const onPhone_numberChanged = e => setPhone_number(e.target.value)
+        const onDevice_detailsChanged = e => setDevice_details(e.target.value)
+
+        const canSave = [name.length, validEmail, address.length, phone_number.length, device_details.length].every(Boolean) && !isLoading
+
+        const onSaveUserClicked = async (e) => {
+          e.preventDefault()
+          if (canSave) {
+              await addNewCustomer({ name,email,address,phone_number,device_details })
+          }
+      }
+
+
   return (
     <div>NewCustomerForm</div>
   )
@@ -57,14 +83,7 @@ export default NewCustomerForm
 //         setValidPassword(PWD_REGEX.test(password))
 //     }, [password])// check the isSuccess status 
 
-//     useEffect(() => {
-//         if (isSuccess) {
-//             setUsername('')
-//             setPassword('')
-//             setRoles([])
-//             navigate('/dash/users')
-//         }
-//     }, [isSuccess, navigate])
+    
 
 //     const onUsernameChanged = e => setUsername(e.target.value)
 //     const onPasswordChanged = e => setPassword(e.target.value)
@@ -77,14 +96,7 @@ export default NewCustomerForm
 //         setRoles(values)
 //     }
 
-//     const canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
 
-//     const onSaveUserClicked = async (e) => {
-//         e.preventDefault()
-//         if (canSave) {
-//             await addNewUser({ username, password, roles })
-//         }
-//     }
 
 //     const options = Object.values(ROLES).map(role => {
 //         return (
