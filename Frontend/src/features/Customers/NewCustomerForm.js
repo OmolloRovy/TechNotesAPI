@@ -42,7 +42,7 @@ const NewCustomerForm = () => {
         const onPhone_numberChanged = e => setPhone_number(e.target.value)
         const onDevice_detailsChanged = e => setDevice_details(e.target.value)
 
-        const canSave = [name.length, validEmail, address.length, phone_number.length, device_details.length].every(Boolean) && !isLoading
+        const canSave = [name, validEmail, address, phone_number, device_details].every(Boolean) && !isLoading
 
         const onSaveUserClicked = async (e) => {
           e.preventDefault()
@@ -50,7 +50,10 @@ const NewCustomerForm = () => {
               await addNewCustomer({ name,email,address,phone_number,device_details })
           }
       }
-
+      const errClass = isError ? "errmsg" : "offscreen"
+      const validUserClass = !validUsername ? 'form__input--incomplete' : ''
+      const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
+      const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
 
   return (
     <div>NewCustomerForm</div>
@@ -108,10 +111,7 @@ export default NewCustomerForm
 //         )
 //     })
 
-//     const errClass = isError ? "errmsg" : "offscreen"
-//     const validUserClass = !validUsername ? 'form__input--incomplete' : ''
-//     const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
-//     const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
+
 
 
 //     const content = (
