@@ -9,7 +9,7 @@ const EditCustomer = () => {
 
     const customer = useSelector(state => selectCustomerById(state, id))
 
-    const content = customer ? <EditCustomerForm user={customer} /> : <p>Loading...</p>
+    const content = customer ? <EditCustomerForm customer={customer} /> : <p>Loading...</p>
 
     return content
 }
