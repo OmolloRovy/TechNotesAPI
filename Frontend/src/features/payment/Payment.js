@@ -21,17 +21,13 @@ const Payment = ({paymentId}) => {
 
       return (
           <tr className="table__row">
-              <td className="table__cell payment__status">
-                  {payment.completed
-                      ? <span className="payment__status--completed">Completed</span>
-                      : <span className="payment__status--open">Open</span>
-                  }
-              </td>
-              <td className="table__cell payment__created">{created}</td>
-              <td className="table__cell payment__updated">{updated}</td>
-              <td className="table__cell payment__title">{payment.title}</td>
-              <td className="table__cell payment__username">{payment.username}</td>
-
+              <td className="table__cell note__username">{payment.name}</td>
+              <td className="table__cell note__username">{payment.amountPaid}</td>
+              <td className="table__cell note__username">{payment.change}</td>
+              <td className="table__cell note__username">{payment.otherMethod}</td>
+              <td className="table__cell note__created">{created}</td>
+              <td className="table__cell note__updated">{updated}</td>
+            
               <td className="table__cell">
                   <button
                       className="icon-button table__button"
