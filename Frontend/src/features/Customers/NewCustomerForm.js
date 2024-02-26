@@ -4,6 +4,8 @@ import { useAddNewCustomerMutation } from "./customersApiSlice"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from "@fortawesome/free-solid-svg-icons"
+
+const USER_REGEX = /@.com/
 const NewCustomerForm = () => {
   const [addNewCustomer, {
             isLoading,
@@ -14,12 +16,16 @@ const NewCustomerForm = () => {
         const navigate = useNavigate()
 
             const [name, setName] = useState('')
-            const [validUsername, setValidUsername] = useState(false)
             const [email, setEmail] = useState('')
             const [validEmail, setValidEmail] = useState(false)
-            const [roles, setRoles] = useState(["Employee"])
-
-
+            const [address, setAddress] = useState('')
+            const [phone_number, setPhone_number] = useState('')
+            const [device_details, setDevice_details] = useState('')
+ 
+            useEffect(() => {
+              setValidEmail(USER_REGEX.test(email))
+          }, [email])
+      
   return (
     <div>NewCustomerForm</div>
   )
@@ -46,9 +52,6 @@ export default NewCustomerForm
 //     const [validPassword, setValidPassword] = useState(false)
 //     const [roles, setRoles] = useState(["Employee"])
 
-//     useEffect(() => {
-//         setValidUsername(USER_REGEX.test(username))
-//     }, [username])
 
 //     useEffect(() => {
 //         setValidPassword(PWD_REGEX.test(password))
