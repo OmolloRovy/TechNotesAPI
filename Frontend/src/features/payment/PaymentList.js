@@ -1,6 +1,6 @@
-import React from 'react'
-import { useGetPaymentsQuery } from "./paymentssApiSlice";
-import Payment from './ Payment'
+import React from "react";
+import { useGetPaymentsQuery } from "./paymentsApiSlice";
+import Payment from "./Payment";
 const PaymentList = () => {
   const {
     data: payments,
@@ -8,7 +8,7 @@ const PaymentList = () => {
     isSuccess,
     isError,
     error,
-  } =useGetPaymentsQuery ();
+  } = useGetPaymentsQuery();
 
   let content;
 
@@ -22,20 +22,20 @@ const PaymentList = () => {
     const { ids } = payments;
 
     const tableContent = ids?.length
-      ? ids.map((paymentId) => <Payment key={paymentId} paymentId={paymentId} />
-        )
-      : null
+      ? ids.map((paymentId) => (
+          <Payment key={paymentId} paymentId={paymentId} />
+        ))
+      : null;
 
     content = (
       <table className="table table--notes">
         <thead className="table__thead">
           <tr>
-          
             <th scope="col" className="table__th user__username">
               Name
             </th>
             <th scope="col" className="table__th user_username">
-            Amount paid
+              Amount paid
             </th>
             <th scope="col" className="table__th user__username">
               Change
@@ -43,7 +43,12 @@ const PaymentList = () => {
             <th scope="col" className="table__th user__username">
               other Method Used
             </th>
-        
+            <th scope="col" className="table__th note__created">
+              Created
+            </th>
+            <th scope="col" className="table__th note__updated">
+              Updated
+            </th>
             <th scope="col" className="table__th user__edit">
               Edit
             </th>
@@ -55,8 +60,6 @@ const PaymentList = () => {
   }
 
   return content;
-}
+};
 
-export default PaymentList
-
-
+export default PaymentList;
