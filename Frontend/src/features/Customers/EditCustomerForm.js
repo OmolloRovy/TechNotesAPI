@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { useState, useEffect } from "react"
-import { useUpdateCustomerMutation, useDeleteCustomerMutation } from "./usersApiSlice"
+import { useUpdateCustomerMutation, useDeleteCustomerMutation } from "./customersApiSlice"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons" 
