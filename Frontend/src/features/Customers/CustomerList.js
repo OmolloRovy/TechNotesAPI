@@ -29,14 +29,14 @@ const CustomerList = () => {
       : null
 
     content = (
-      <table className="table table--users">
+      <table className="table table--notes">
         <thead className="table__thead">
           <tr>
-
+          
             <th scope="col" className="table__th user__username">
               Name
             </th>
-            <th scope="col" className="table__th user__username">
+            <th scope="col" className="table__th user_username">
               Email
             </th>
             <th scope="col" className="table__th user__username">
