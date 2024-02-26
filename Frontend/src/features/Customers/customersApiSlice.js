@@ -69,9 +69,9 @@ export const customersApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetCustomersQuery,
-//   useAddNewCustomerMutation,
-//   useUpdateCustomerMutation,
-//   useDeleteCustomerMutation,
+  useAddNewCustomerMutation,
+  useUpdateCustomerMutation,
+  useDeleteCustomerMutation,
 } = customersApiSlice
 
 // returns the query result object

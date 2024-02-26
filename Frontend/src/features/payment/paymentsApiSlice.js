@@ -69,9 +69,9 @@ export const paymentsApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetPaymentsQuery,
-// //   useAddNewPaymentMutation,
-//   useUpdatePaymentMutation,
-//   useDeletePaymentMutation,
+useAddNewPaymentMutation,
+  useUpdatePaymentMutation,
+  useDeletePaymentMutation,
 } = paymentsApiSlice
 
 // returns the query result object
