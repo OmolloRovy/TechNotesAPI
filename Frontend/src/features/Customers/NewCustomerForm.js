@@ -44,134 +44,98 @@ const NewCustomerForm = () => {
 
         const canSave = [name, validEmail, address, phone_number, device_details].every(Boolean) && !isLoading
 
-        const onSaveUserClicked = async (e) => {
+        const onSaveCustomerClicked = async (e) => {
           e.preventDefault()
           if (canSave) {
               await addNewCustomer({ name,email,address,phone_number,device_details })
           }
       }
       const errClass = isError ? "errmsg" : "offscreen"
-      const validUserClass = !validUsername ? 'form__input--incomplete' : ''
-      const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
-      const validRolesClass = !Boolean(roles.length) ? 'form__input--incomplete' : ''
+      const validNameClass = !name ? "form__input--incomplete" : ''
+      const validEmailClass = !validEmail ? 'form__input--incomplete' : ''
+      const validAddressClass = !address? "form__input--incomplete" : ''
+      const validPhone_numberClass = !phone_number? "form__input--incomplete" : ''
+      const validDevice_detailsClass = !device_details? "form__input--incomplete" : ''
+    
+      const content = (
+        <>
+            <p className={errClass}>{error?.data?.message}</p>
 
-  return (
-    <div>NewCustomerForm</div>
-  )
+            <form className="form" onSubmit={onSaveCustomerClicked}>
+                <div className="form__title-row">
+                    <h2>New Customer</h2>
+                    <div className="form__action-buttons">
+                        <button
+                            className="icon-button"
+                            title="Save"
+                            disabled={!canSave}
+                        >
+                            <FontAwesomeIcon icon={faSave} />
+                        </button>
+                    </div>
+                </div>
+                <label className="form__label" htmlFor="name">
+                    Name: </label>
+                <input
+                    className={`form__input ${validNameClass}`}
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="off"
+                    value={name}
+                    onChange={onNameChanged}
+                />
+
+                <label className="form__label" htmlFor="email">
+                    Email: <span className="nowrap1">[incl. @]</span></label>
+                <input
+                    className={`form__input ${validEmailClass}`}
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={onEmailChanged}
+                />
+ <label className="form__label" htmlFor="address">
+                    Address: </label>
+                <input
+                    className={`form__input ${validAddressClass}`}
+                    id="address"
+                    name="address"
+                    type="text"
+                    value={address}
+                    onChange={onAddressChanged}
+                />
+                
+                <label className="form__label" htmlFor="phone_number">
+                    Phone Number: </label>
+                <input
+                    className={`form__input ${validPhone_numberClass}`}
+                    id="phone_number"
+                    name="phone_number"
+                    type="integer"
+                    value={phone_number}
+                    onChange={onPhone_numberChanged}
+                    
+                />
+                
+                <label className="form__label" htmlFor="device_details">
+                    Device Details:</label>
+                <input
+                    className={`form__input ${validDevice_detailsClass}`}
+                    id="device_details"
+                    name="device_details"
+                    type="text"
+                    value={device_details}
+                    onChange={onDevice_detailsChanged}
+                    
+                />
+
+
+            </form>
+        </>
+    )
+  return content 
 }
 
 export default NewCustomerForm
-
-
-
-// const NewUserForm = () => {
-
-//     const [addNewUser, {
-//         isLoading,
-//         isSuccess,
-//         isError,
-//         error
-//     }] = useAddNewUserMutation()
-
-//     const navigate = useNavigate()
-
-//     const [username, setUsername] = useState('')
-//     const [validUsername, setValidUsername] = useState(false)
-//     const [password, setPassword] = useState('')
-//     const [validPassword, setValidPassword] = useState(false)
-//     const [roles, setRoles] = useState(["Employee"])
-
-
-//     useEffect(() => {
-//         setValidPassword(PWD_REGEX.test(password))
-//     }, [password])// check the isSuccess status 
-
-    
-
-//     const onUsernameChanged = e => setUsername(e.target.value)
-//     const onPasswordChanged = e => setPassword(e.target.value)
-
-//     const onRolesChanged = e => {
-//         const values = Array.from(
-//             e.target.selectedOptions, //HTMLCollection 
-//             (option) => option.value
-//         )
-//         setRoles(values)
-//     }
-
-
-
-//     const options = Object.values(ROLES).map(role => {
-//         return (
-//             <option
-//                 key={role}
-//                 value={role}
-
-//             > {role}</option >
-//         )
-//     })
-
-
-
-
-//     const content = (
-//         <>
-//             <p className={errClass}>{error?.data?.message}</p>
-
-//             <form className="form" onSubmit={onSaveUserClicked}>
-//                 <div className="form__title-row">
-//                     <h2>New User</h2>
-//                     <div className="form__action-buttons">
-//                         <button
-//                             className="icon-button"
-//                             title="Save"
-//                             disabled={!canSave}
-//                         >
-//                             <FontAwesomeIcon icon={faSave} />
-//                         </button>
-//                     </div>
-//                 </div>
-//                 <label className="form__label" htmlFor="username">
-//                     Username: <span className="nowrap1">[3-20 letters]</span></label>
-//                 <input
-//                     className={`form__input ${validUserClass}`}
-//                     id="username"
-//                     name="username"
-//                     type="text"
-//                     autoComplete="off"
-//                     value={username}
-//                     onChange={onUsernameChanged}
-//                 />
-
-//                 <label className="form__label" htmlFor="password">
-//                     Password: <span className="nowrap1">[4-12 chars incl. !@#$%]</span></label>
-//                 <input
-//                     className={`form__input ${validPwdClass}`}
-//                     id="password"
-//                     name="password"
-//                     type="password"
-//                     value={password}
-//                     onChange={onPasswordChanged}
-//                 />
-
-//                 <label className="form__label" htmlFor="roles">
-//                     ASSIGNED ROLES:</label>
-//                 <select
-//                     id="roles"
-//                     name="roles"
-//                     className={`form__select ${validRolesClass}`}
-//                     multiple={true}
-//                     size="3"
-//                     value={roles}
-//                     onChange={onRolesChanged}
-//                 >
-//                     {options}
-//                 </select>
-
-//             </form>
-//         </>
-//     )
-
-//     return content
-// }
-// export default NewUserForm
