@@ -31,21 +31,19 @@ const PaymentList = () => {
       <table className="table table--notes">
         <thead className="table__thead">
           <tr>
-            <th scope="col" className="table__th user__username">
-              Name
+            <th scope="col" className="table__th user__created">
+             Customer Name
             </th>
-            <th scope="col" className="table__th user_username">
+            <th scope="col" className="table__th user_created">
               Amount paid
             </th>
-            <th scope="col" className="table__th user__username">
+            <th scope="col" className="table__th user__created">
               Change
             </th>
-            <th scope="col" className="table__th user__username">
+            <th scope="col" className="table__th user__created">
               other Method Used
             </th>
-            <th scope="col" className="table__th note__created">
-              Created
-            </th>
+           
             <th scope="col" className="table__th note__updated">
               Updated
             </th>
