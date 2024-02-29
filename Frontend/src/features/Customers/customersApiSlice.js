@@ -38,6 +38,8 @@ export const customersApiSlice = apiSlice.injectEndpoints({
                  
               }
           }),
+          onQueryStarted: async (api, { data }) => {
+            console.log("Initial Customer Data:", data);
           invalidatesTags: [
               { type: 'Customer', id: "LIST" }
           ]
