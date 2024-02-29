@@ -4,7 +4,6 @@ import { apiSlice } from '../../app/api/apiSlice';
 const customersAdapter = createEntityAdapter();
 
 const initialState = customersAdapter.getInitialState();
-note
  
 export const customersApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
@@ -36,6 +35,7 @@ export const customersApiSlice = apiSlice.injectEndpoints({
               method: 'POST',
               body: {
                   ...initialCustomerData,
+                 
               }
           }),
           invalidatesTags: [
