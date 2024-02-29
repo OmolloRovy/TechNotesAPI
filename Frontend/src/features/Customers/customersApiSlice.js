@@ -30,19 +30,20 @@ export const customersApiSlice = apiSlice.injectEndpoints({
           }
       }),
       addNewCustomer: builder.mutation({
-          query: initialCustomerData => ({
-              url: '/customers',
-              method: 'POST',
-              body: {
-                  ...initialCustomerData,
-                 
-              }
-          }),
-          onQueryStarted: async (api, { data }) => {
-            console.log("Initial Customer Data:", data);
-          invalidatesTags: [
-              { type: 'Customer', id: "LIST" }
-          ]
+        query: (initialCustomerData) => ({
+          url: '/customers',
+          method: 'POST',
+          body: {
+            ...initialCustomerData,
+          },
+        }),
+        // Add preFetch logic here
+        onQueryStarted: async (api, { data }) => {
+          console.log("Initial Customer Data:", data); // Log initialCustomerData here
+        },
+        invalidatesTags: [
+          { type: 'Customer', id: "LIST" }
+        ]
       }),
       updateCustomer: builder.mutation({
           query: initialCustomerData => ({

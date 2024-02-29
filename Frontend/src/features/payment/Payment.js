@@ -21,7 +21,7 @@ const Payment = ({paymentId}) => {
 
       return (
           <tr className="table__row">
-              <td className="table__cell note__username">{payment.name}</td>
+              <td className="table__cell note__username">{payment.Cname}</td>
               <td className="table__cell note__username">{payment.amountPaid}</td>
               <td className="table__cell note__created">{payment.change}</td>
               <td className="table__cell note__created">{payment.otherMethods}</td>

@@ -41,7 +41,6 @@ const EditNoteForm = ({ note, users }) => {
     const onTextChanged = e => setText(e.target.value)
     const onCompletedChanged = e => setCompleted(prev => !prev)
     const onUserIdChanged = e => setUserId(e.target.value)
-
     const canSave = [title, text, userId].every(Boolean) && !isLoading
 
     const onSaveNoteClicked = async (e) => {
@@ -70,7 +69,6 @@ const EditNoteForm = ({ note, users }) => {
     const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
     const validTitleClass = !title ? "form__input--incomplete" : ''
     const validTextClass = !text ? "form__input--incomplete" : ''
-
     const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
     const content = (
