@@ -83,7 +83,7 @@ const NewPaymentForm = ({ customers }) => {
             </button>
           </div>
         </div>
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="name">
           Customer Name
         </label>
         <input
@@ -95,7 +95,7 @@ const NewPaymentForm = ({ customers }) => {
           value={name}
           onChange={onNameChanged}
         />
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="amountPaid">
           Amount Paid
         </label>
         <input
@@ -107,7 +107,7 @@ const NewPaymentForm = ({ customers }) => {
           value={amountPaid}
           onChange={onAmountPaidChanged}
         />
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="change">
           Return Change
         </label>
         <input
@@ -120,7 +120,7 @@ const NewPaymentForm = ({ customers }) => {
           onChange={onChangeChanged}
         />
 
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="otherMethods">
           Other Methods Used
         </label>
         <input
@@ -146,13 +146,13 @@ const NewPaymentForm = ({ customers }) => {
 
         <label
           className="form__label form__checkbox-container"
-          htmlFor="customername"
+          htmlFor="name"
         >
           Payment from:{" "}
         </label>
         <select
-          id="customername"
-          name="customername"
+          id="name"
+          name="name"
           className="form__select"
           value={customerId}
           onChange={onCustomerIdChanged}
