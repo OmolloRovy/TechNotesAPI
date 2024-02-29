@@ -48,19 +48,25 @@ const EditPaymentForm = ({ payment, customers }) => {
     [name, amountPaid, change, otherMethods, text, customerId].every(Boolean) &&
     !isLoading;
 
-  const onSavePaymentClicked = async (e) => {
-    e.preventDefault();
-    if (canSave) {
-      await updatePayment({
-        customer: customerId,
-        name,
-        amountPaid,
-        change,
-        otherMethods,
-        text,
-      });
-    }
-  };
+    const onSavePaymentClicked = async (e) => {
+      e.preventDefault();
+      if (canSave) {
+        try {
+          await updatePayment({
+            customer: customerId,
+            name,
+            amountPaid,
+            change,
+            otherMethods,
+            text,
+          });
+        } catch (err) {
+          
+          console.error("Error updating payment:", err);
+         
+        }
+      }
+    };
 
   const onDeletePaymentClicked = async () => {
     await deletePayment({ id: payment.id });
