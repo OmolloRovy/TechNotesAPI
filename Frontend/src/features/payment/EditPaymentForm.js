@@ -91,8 +91,7 @@ const EditPaymentForm = ({ payment, customers }) => {
       </option>
     );
   });
-
-  const errClass = isError ? "errmsg" : "offscreen";
+  const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
   const validNameClass = !name ? "form__input--incomplete" : "";
   const validAmountPaidClass = !amountPaid ? "form__input--incomplete" : "";
   const validChangeClass = !change ? "form__input--incomplete" : "";
