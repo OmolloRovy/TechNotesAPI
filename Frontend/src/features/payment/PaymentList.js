@@ -46,10 +46,6 @@ const PaymentList = () => {
             <th scope="col" className="table__th user__created">
             Remarks
             </th>
-           
-            <th scope="col" className="table__th note__updated">
-              Updated
-            </th>
             <th scope="col" className="table__th user__edit">
               Edit
             </th>
