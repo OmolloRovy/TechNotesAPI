@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
-const EditPaymentForm = ({ payment, customers }) => {
+const EditPaymentForm = ({ payment }) => {
   const [updatePayment, { isLoading, isSuccess, isError, error }] =
     useUpdatePaymentMutation();
 
@@ -22,8 +22,8 @@ const EditPaymentForm = ({ payment, customers }) => {
   const [amountPaid, setAmountPaid] = useState(payment.amountPaid);
   const [change, setChange] = useState(payment.change);
   const [otherMethods, setOtherMethods] = useState(payment.otherMethods);
-  const [text, setText] = useState(payment.text);
-  const [customerId, setCustomerId] = useState(customers[0].id);
+  const [remarks, setRemarks] = useState(payment.remarks);
+  
 
   useEffect(() => {
     if (isSuccess || isDelSuccess) {
@@ -31,8 +31,8 @@ const EditPaymentForm = ({ payment, customers }) => {
       setAmountPaid("");
       setChange("");
       setOtherMethods("");
-      setText("");
-      setCustomerId("");
+      setRemarks("");
+     
       navigate("/dash/payments");
     }
   }, [isSuccess, isDelSuccess, navigate]);
@@ -41,11 +41,10 @@ const EditPaymentForm = ({ payment, customers }) => {
   const onAmountPaidChanged = (e) => setAmountPaid(e.target.value);
   const onChangeChanged = (e) => setChange(e.target.value);
   const onOtherMethodsChanged = (e) => setOtherMethods(e.target.value);
-  const onTextChanged = (e) => setText(e.target.value);
-  const onCustomerIdChanged = (e) => setCustomerId(e.target.value);
+  const onRemarksChanged = (e) => setRemarks(e.target.value);
 
   const canSave =
-    [name, amountPaid, change, otherMethods, text, customerId].every(Boolean) &&
+    [name, amountPaid, change, otherMethods,    remarks].every(Boolean) &&
     !isLoading;
 
     const onSavePaymentClicked = async (e) => {
@@ -53,12 +52,12 @@ const EditPaymentForm = ({ payment, customers }) => {
       if (canSave) {
         try {
           await updatePayment({
-            customer: customerId,
+          
             name,
             amountPaid,
             change,
             otherMethods,
-            text,
+            remarks,
           });
         } catch (err) {
           
@@ -89,20 +88,13 @@ const EditPaymentForm = ({ payment, customers }) => {
     second: "numeric",
   });
 
-  const options = customers.map((customer) => {
-    return (
-      <option key={customer.id} value={customer.id}>
-        {" "}
-        {customer.name}
-      </option>
-    );
-  });
+
   const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
   const validNameClass = !name ? "form__input--incomplete" : "";
   const validAmountPaidClass = !amountPaid ? "form__input--incomplete" : "";
   const validChangeClass = !change ? "form__input--incomplete" : "";
   const validOtherMethodsClass = !otherMethods ? "form__input--incomplete" : "";
-  const validTextClass = !text ? "form__input--incomplete" : "";
+  const validRemarksClass = !remarks ? "form__input--incomplete" : "";
   const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
   const content = (
@@ -140,6 +132,7 @@ const EditPaymentForm = ({ payment, customers }) => {
           type="text"
           autoComplete="off"
           value={name}
+        
           onChange={onNameChanged}
         />
         <label className="form__label" htmlFor="title">
@@ -180,32 +173,18 @@ const EditPaymentForm = ({ payment, customers }) => {
           onChange={onOtherMethodsChanged}
         />
 
-        <label className="form__label" htmlFor="text">
+<label className="form__label" htmlFor="remarks">
           Remarks{" "}
         </label>
         <textarea
-          className={`form__input form__input--text ${validTextClass}`}
-          id="text"
-          name="text"
-          value={text}
-          onChange={onTextChanged}
+          className={`form__input form__input--text ${validRemarksClass}`}
+          id="remarks"
+          name="remarks"
+          value={remarks}
+          onChange={onRemarksChanged}
         />
 
-        <label
-          className="form__label form__checkbox-container"
-          htmlFor="customername"
-        >
-          Payment from:{" "}
-        </label>
-        <select
-          id="customername"
-          name="customername"
-          className="form__select"
-          value={customerId}
-          onChange={onCustomerIdChanged}
-        >
-          {options}
-        </select>
+        
         <div className="form__divider">
           <p className="form__created">
             Created:

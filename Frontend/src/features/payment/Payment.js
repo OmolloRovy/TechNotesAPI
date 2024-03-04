@@ -1,11 +1,10 @@
+import React from 'react'
+import {useNavigate} from "react-router-dom";
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
-import { useNavigate } from 'react-router-dom'
-
-import { useSelector } from 'react-redux'
 import { selectPaymentById } from './paymentsApiSlice'
 
-import React from 'react'
 
 const Payment = ({paymentId}) => {
   const payment = useSelector(state => selectPaymentById(state, paymentId))
@@ -21,11 +20,11 @@ const Payment = ({paymentId}) => {
 
       return (
           <tr className="table__row">
-              <td className="table__cell note__username">{payment.Cname}</td>
+              <td className="table__cell note__username">{payment.name}</td>
               <td className="table__cell note__username">{payment.amountPaid}</td>
               <td className="table__cell note__created">{payment.change}</td>
               <td className="table__cell note__created">{payment.otherMethods}</td>
-            
+              <td className="table__cell note__created">{payment.remarks}</td>
               <td className="table__cell note__updated">{updated}</td>
             
               <td className="table__cell">

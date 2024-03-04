@@ -43,6 +43,9 @@ const PaymentList = () => {
             <th scope="col" className="table__th user__created">
               other Method Used
             </th>
+            <th scope="col" className="table__th user__created">
+            Remarks
+            </th>
            
             <th scope="col" className="table__th note__updated">
               Updated

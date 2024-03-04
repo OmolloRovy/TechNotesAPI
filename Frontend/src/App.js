@@ -12,9 +12,9 @@ import EditUser from "./features/users/EditUser";
 import NewUserForm from "./features/users/NewUserForm";
 import EditNote from "./features/notes/EditNote";
 import NewNote from "./features/notes/NewNote";
-import CustomerList from "./features/Customers/CustomerList";
-import EditCustomer from "./features/Customers/EditCustomer";
-import NewCustomerForm from "./features/Customers/NewCustomerForm";
+// import CustomerList from "./features/Customers/CustomerList";
+// import EditCustomer from "./features/Customers/EditCustomer";
+// import NewCustomerForm from "./features/Customers/NewCustomerForm";
 
 import Prefetch from "./features/auth/Prefetch";
 import PaymentList from "./features/payment/PaymentList";
@@ -39,12 +39,12 @@ function App() {
               <Route path=":id" element={<EditUser />} />
               <Route path="new" element={<NewUserForm />} />
             </Route>
-            <Route path="customers">
+            {/* <Route path="customers">
               <Route index element={<CustomerList />} />
               <Route path=":id" element={<EditCustomer/>} />
               <Route path=":new" element={<NewCustomerForm/>} />
 
-            </Route>
+            </Route> */}
             <Route path="payments">
               <Route index element={<PaymentList />} />
               <Route path=":id" element={<EditPayment/>} />

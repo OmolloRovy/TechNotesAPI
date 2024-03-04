@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux'
-import { selectAllCustomers } from '../Customers/customersApiSlice'
+import { selectAllPayments } from '../payment/paymentsApiSlice'
 import NewPaymentForm from './NewPaymentForm'
 
 const NewPayment  = () => {
-    const customers = useSelector(selectAllCustomers)
+    const payments = useSelector(selectAllPayments)
 
-    if (!customers?.length) return <p>Not Currently Available</p>
+    if (!payments?.length) return <p>Not Currently Available</p>
 
-    const content = <NewPaymentForm customers={customers} />
+    const content = <NewPaymentForm payments={payments} />
 
     return content
 }
