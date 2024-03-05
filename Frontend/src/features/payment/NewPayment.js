@@ -5,7 +5,7 @@ import NewPaymentForm from './NewPaymentForm'
 const NewPayment  = () => {
     const payments = useSelector(selectAllPayments)
 
-    if (!payments?.length) return <p>Not Currently Available</p>
+    if (!payments?.length) return <p>Loading....</p>
 
     const content = <NewPaymentForm payments={payments} />
 

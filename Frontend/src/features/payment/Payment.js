@@ -25,7 +25,7 @@ const Payment = ({paymentId}) => {
               <td className="table__cell note__created">{payment.change}</td>
               <td className="table__cell note__created">{payment.otherMethods}</td>
               <td className="table__cell note__created">{payment.remarks}</td>
-              <td className="table__cell note__updated">{updated}</td>
+              {/* <td className="table__cell note__updated">{updated}</td> */}
             
               <td className="table__cell">
                   <button

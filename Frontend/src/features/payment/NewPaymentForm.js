@@ -40,6 +40,7 @@ const NewPaymentForm = () => {
 
   const onSavePaymentClicked = async (e) => {
     e.preventDefault();
+    try{
     if (canSave) {
       await addNewPayment({
         name,
@@ -49,6 +50,9 @@ const NewPaymentForm = () => {
         remarks,
       });
     }
+  }catch(error){
+    console.log("erro here: ", error)
+  }
   };
 
 
@@ -72,8 +76,8 @@ const NewPaymentForm = () => {
             </button>
           </div>
         </div>
-        <label className="form__label" htmlFor="name">
-           Name
+        <label className="form__label" for="name">
+          Customer Name
         </label>
         <input
           className={`form__input ${validNameClass}`}
@@ -84,7 +88,7 @@ const NewPaymentForm = () => {
           value={name}
           onChange={onNameChanged}
         />
-        <label className="form__label" htmlFor="amountPaid">
+        <label className="form__label" for="amountPaid">
           Amount Paid
         </label>
         <input
@@ -96,7 +100,7 @@ const NewPaymentForm = () => {
           value={amountPaid}
           onChange={onAmountPaidChanged}
         />
-        <label className="form__label" htmlFor="change">
+        <label className="form__label" for="change">
           Return Change
         </label>
         <input
@@ -109,7 +113,7 @@ const NewPaymentForm = () => {
           onChange={onChangeChanged}
         />
 
-        <label className="form__label" htmlFor="otherMethods">
+        <label className="form__label" for="otherMethods">
           Other Methods Used
         </label>
         <input
@@ -122,7 +126,7 @@ const NewPaymentForm = () => {
           onChange={onOtherMethodsChanged}
         />
 
-        <label className="form__label" htmlFor="remarks">
+        <label className="form__label" for="remarks">
           Remarks
         </label>
         <textarea

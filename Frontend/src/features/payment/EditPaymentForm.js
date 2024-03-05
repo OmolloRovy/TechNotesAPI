@@ -8,21 +8,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const EditPaymentForm = ({ payment }) => {
-  const [updatePayment, { isLoading, isSuccess, isError, error }] =
-    useUpdatePaymentMutation();
+  const [updatePayment, { 
+    isLoading, 
+    isSuccess,
+     isError,
+      error 
+    }] = useUpdatePaymentMutation();
 
   const [
     deletePayment,
-    { isSuccess: isDelSuccess, isError: isDelError, error: delerror },
+    { isSuccess:isDelSuccess, 
+      isError: isDelError, 
+      error: delerror },
   ] = useDeletePaymentMutation();
 
   const navigate = useNavigate();
-
+console.log("payment: ", payment)
   const [name, setName] = useState(payment.name);
   const [amountPaid, setAmountPaid] = useState(payment.amountPaid);
   const [change, setChange] = useState(payment.change);
   const [otherMethods, setOtherMethods] = useState(payment.otherMethods);
   const [remarks, setRemarks] = useState(payment.remarks);
+  const id = payment.id
   
 
   useEffect(() => {
@@ -49,22 +56,23 @@ const EditPaymentForm = ({ payment }) => {
 
     const onSavePaymentClicked = async (e) => {
       e.preventDefault();
-      if (canSave) {
+      console.log("saving...")
         try {
+      if (canSave) {
           await updatePayment({
-          
+            id,
             name,
             amountPaid,
             change,
             otherMethods,
             remarks,
           });
-        } catch (err) {
+        } 
+      }catch (err) {
           
           console.error("Error updating payment:", err);
          
         }
-      }
     };
 
   const onDeletePaymentClicked = async () => {
@@ -122,7 +130,7 @@ const EditPaymentForm = ({ payment }) => {
             </button>
           </div>
         </div>
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="name">
           Customer Name
         </label>
         <input
@@ -135,7 +143,7 @@ const EditPaymentForm = ({ payment }) => {
         
           onChange={onNameChanged}
         />
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="amountPaid">
           Amount Paid
         </label>
         <input
@@ -147,7 +155,7 @@ const EditPaymentForm = ({ payment }) => {
           value={amountPaid}
           onChange={onAmountPaidChanged}
         />
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="change">
           Return Change
         </label>
         <input
@@ -160,7 +168,7 @@ const EditPaymentForm = ({ payment }) => {
           onChange={onChangeChanged}
         />
 
-        <label className="form__label" htmlFor="title">
+        <label className="form__label" htmlFor="otherMethods">
           Other Methods Used
         </label>
         <input

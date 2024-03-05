@@ -10,9 +10,8 @@ const EditPayment = () => {
     const payment = useSelector(state => selectPaymentById(state, id))
     
 
-    const content =payment ? <EditPaymentForm payment={payment}/> : <p>Loading...</p>
+    const content = payment ? <EditPaymentForm payment={payment}/> : <p>Loading...</p>
 
     return content
 }
-
 export default EditPayment
